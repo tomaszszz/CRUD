@@ -1,0 +1,40 @@
+<h1>Enter necessary data to sign up</h1>
+<form action="submit" class="form" [formGroup]="form">
+  <div class="form-fields">
+    <mat-form-field appearance="outline">
+      <input
+        matInput
+        formControlName="login"
+        type="text"
+        required
+        placeholder="Login"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <input
+        matInput
+        formControlName="password"
+        type="text"
+        required
+        placeholder="Password"
+      />
+    </mat-form-field>
+  </div>
+  <!-- <mat-form-field appearance="outline">
+    <input
+      matInput
+      formControlName="email"
+      type="text"
+      required
+      placeholder="E-Mail"
+    />
+  </mat-form-field> -->
+  <div class="buttons">
+    <button mat-raised-button color="accent" (click)="register()">
+      Sign Up
+    </button>
+    <button mat-raised-button color="primary" routerLink="../login">
+      Login
+    </button>
+  </div>
+</form>

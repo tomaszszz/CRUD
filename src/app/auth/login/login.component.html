@@ -1,0 +1,29 @@
+<h1>Enter login and password</h1>
+<form action="submit" class="form" [formGroup]="form">
+  <div class="form-fields">
+    <mat-form-field appearance="outline">
+      <input
+        matInput
+        formControlName="login"
+        type="text"
+        required
+        placeholder="Login"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <input
+        matInput
+        formControlName="password"
+        type="text"
+        required
+        placeholder="Password"
+      />
+    </mat-form-field>
+  </div>
+  <div class="buttons">
+    <button mat-raised-button color="accent" (click)="login()">Login</button>
+    <button mat-raised-button color="primary" routerLink="../sign-up">
+      Sign Up
+    </button>
+  </div>
+</form>
