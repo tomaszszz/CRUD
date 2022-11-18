@@ -12,7 +12,8 @@
       <a mat-list-item href="#" routerLink="auth/login">Login</a>
       <a mat-list-item href="#" routerLink="main">Main</a>
       <a mat-list-item href="#" routerLink="dashboard">Dashboard</a>
-      <a mat-list-item href="#" (click)="logout()">Logout</a>
+      <a mat-list-item href="#" routerLink="dashboard/users">Users</a>
+      <a mat-list-item (click)="logout()">Logout</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -27,6 +28,25 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>CRUD</span>
+      <ul class="nav">
+        <li>
+          <button
+            type="button"
+            aria-label="add user"
+            color="accent"
+            mat-raised-button
+            (click)="addUserDialog()"
+            *ngIf="isUsersRoute | async"
+          >
+            Add User
+          </button>
+        </li>
+        Current Route:
+        {{
+          whichRoute | async
+        }}
+        <li></li>
+      </ul>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>

@@ -1,0 +1,20 @@
+<ng-container *ngIf="users$ | async as users">
+  <mat-card *ngFor="let user of users" class="card">
+    <mat-card-header>
+      <img matCardAvatar [src]="user.avatar" />
+      <mat-card-title>
+        {{ user.firstName }} {{ user.lastName }}
+      </mat-card-title>
+      <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
+    </mat-card-header>
+    <!-- <img matCardImage [src]="user.avatar" /> -->
+    <!-- <mat-card-content> content </mat-card-content> -->
+    <mat-card-actions align="start">
+      <button color="primary" mat-flat-button>Edit User Data</button>
+      <button color="error" (click)="deleteUser(user)" mat-flat-button>
+        Remove User
+      </button>
+    </mat-card-actions>
+    <mat-card-footer> User ID: {{ user.id }} </mat-card-footer>
+  </mat-card>
+</ng-container>

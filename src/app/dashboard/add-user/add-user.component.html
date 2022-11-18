@@ -1,0 +1,31 @@
+<h1>Add New User</h1>
+<form class="add-user" [formGroup]="userForm">
+  <mat-form-field>
+    <input
+      matInput
+      formControlName="firstName"
+      type="text"
+      placeholder="First Name"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      formControlName="lastName"
+      type="text"
+      placeholder="Last Name"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="email" type="text" placeholder="E-mail" />
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      formControlName="avatar"
+      type="text"
+      placeholder="Avatar URL"
+    />
+  </mat-form-field>
+  <button color="accent" (click)="addUser()" mat-flat-button>Add User</button>
+</form>
