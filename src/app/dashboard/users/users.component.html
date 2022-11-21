@@ -1,20 +1,31 @@
-<ng-container *ngIf="users$ | async as users">
-  <mat-card *ngFor="let user of users" class="card">
-    <mat-card-header>
-      <img matCardAvatar [src]="user.avatar" />
-      <mat-card-title>
-        {{ user.firstName }} {{ user.lastName }}
-      </mat-card-title>
-      <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
-    </mat-card-header>
-    <!-- <img matCardImage [src]="user.avatar" /> -->
-    <!-- <mat-card-content> content </mat-card-content> -->
-    <mat-card-actions align="start">
-      <button color="primary" mat-flat-button>Edit User Data</button>
-      <button color="error" (click)="deleteUser(user)" mat-flat-button>
-        Remove User
-      </button>
-    </mat-card-actions>
-    <mat-card-footer> User ID: {{ user.id }} </mat-card-footer>
-  </mat-card>
+<ng-container *ngIf="users$ | async | paginate: 7 as pages">
+  <ng-container *ngFor="let page of pages; count as c; index as i">
+    <ng-container *ngIf="currentPage === i">
+      <mat-card *ngFor="let user of page" class="card">
+        <mat-card-header>
+          <img matCardAvatar [src]="user.avatar" />
+          <mat-card-title>
+            {{ user.firstName }} {{ user.lastName }}
+          </mat-card-title>
+          <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
+        </mat-card-header>
+        <!-- <img matCardImage [src]="user.avatar" /> -->
+        <!-- <mat-card-content> content </mat-card-content> -->
+        <mat-card-actions align="start">
+          <button color="primary" mat-flat-button>Edit User Data</button>
+          <button color="error" (click)="deleteUser(user)" mat-flat-button>
+            Remove User
+          </button>
+        </mat-card-actions>
+        <mat-card-footer> User ID: {{ user.id }} </mat-card-footer>
+      </mat-card>
+    </ng-container>
+  </ng-container>
+  <ul class="pagination">
+    <li *ngFor="let pageIndex of pages; index as i">
+      <a (click)="navigateToPage(i)">
+        {{ i + 1 }}
+      </a>
+    </li>
+  </ul>
 </ng-container>

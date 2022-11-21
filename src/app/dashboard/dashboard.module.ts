@@ -9,6 +9,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
+import { SharedModule } from '../_helpers/shared/shared.module';
 import { AddUserComponent } from './add-user/add-user.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -19,6 +20,7 @@ import { UsersComponent } from './users/users.component';
   imports: [
     CommonModule,
     DashboardRoutingModule,
+    SharedModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatGridListModule,

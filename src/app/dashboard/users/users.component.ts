@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { first, Observable } from 'rxjs';
+import { Component, DoCheck, OnInit } from '@angular/core';
+import { first } from 'rxjs';
 import { UserModel } from 'src/app/_models/User';
 import { DataService } from 'src/app/_services/data.service';
 
@@ -10,8 +10,8 @@ import { DataService } from 'src/app/_services/data.service';
 })
 export class UsersComponent implements OnInit {
   users$ = this.data.allUsers;
-
   isEditMode: boolean = false;
+  currentPage = 0;
 
   constructor(private data: DataService) {}
 
@@ -28,5 +28,17 @@ export class UsersComponent implements OnInit {
           location.reload();
         },
       });
+  }
+
+  nextPage(): void {
+    this.currentPage++;
+  }
+
+  prevPage(): void {
+    this.currentPage--;
+  }
+
+  navigateToPage(page: number) {
+    this.currentPage = page;
   }
 }

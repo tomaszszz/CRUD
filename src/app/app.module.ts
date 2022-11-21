@@ -16,6 +16,7 @@ import { TokenInterceptor } from './_helpers/token.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PaginatePipe } from './_helpers/paginate.pipe';
 
 @NgModule({
   declarations: [AppComponent, NavigationComponent],
