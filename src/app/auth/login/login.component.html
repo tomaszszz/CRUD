@@ -1,29 +1,39 @@
-<h1>Enter login and password</h1>
-<form action="submit" class="form" [formGroup]="form">
-  <div class="form-fields">
-    <mat-form-field appearance="outline">
-      <input
-        matInput
-        formControlName="login"
-        type="text"
-        required
-        placeholder="Login"
-      />
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <input
-        matInput
-        formControlName="password"
-        type="text"
-        required
-        placeholder="Password"
-      />
-    </mat-form-field>
-  </div>
-  <div class="buttons">
-    <button mat-raised-button color="accent" (click)="login()">Login</button>
-    <button mat-raised-button color="primary" routerLink="../sign-up">
-      Sign Up
-    </button>
-  </div>
-</form>
+<ng-container
+  [ngTemplateOutlet]="auth.currentUserValue ? loggedInTemplate : loginTemplate"
+>
+</ng-container>
+<ng-template #loginTemplate>
+  <h1>Enter login and password</h1>
+  <form action="submit" class="form" [formGroup]="form">
+    <div class="form-fields">
+      <mat-form-field appearance="outline">
+        <input
+          matInput
+          formControlName="login"
+          type="text"
+          required
+          placeholder="Login"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input
+          matInput
+          formControlName="password"
+          type="text"
+          required
+          [placeholder]="'Password' | hashPassword: '*'"
+        />
+        <!-- Pipe just for demonstration purposes -->
+      </mat-form-field>
+    </div>
+    <div class="buttons">
+      <button mat-raised-button color="accent" (click)="login()">Login</button>
+      <button mat-raised-button color="primary" routerLink="../sign-up">
+        Sign Up
+      </button>
+    </div>
+  </form>
+</ng-template>
+<ng-template #loggedInTemplate>
+  <h1>You are logged in.</h1>
+</ng-template>

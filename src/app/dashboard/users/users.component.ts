@@ -9,10 +9,12 @@ import { DataService } from 'src/app/_services/data.service';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-  user$ = this.data.singleUser;
   users$ = this.data.allUsers;
 
+  isEditMode: boolean = false;
+
   constructor(private data: DataService) {}
+
   ngOnInit(): void {}
 
   deleteUser(user: UserModel) {
@@ -22,7 +24,9 @@ export class UsersComponent implements OnInit {
       .subscribe({
         next: () => console.warn('Pending delete'),
         error: (err) => console.error(`Something went wrong: ${err}`),
-        complete: () => console.log('User successfully deleted'),
+        complete: () => {
+          location.reload();
+        },
       });
   }
 }

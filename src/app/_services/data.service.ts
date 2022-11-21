@@ -8,28 +8,23 @@ import { UserModel } from '../_models/User';
   providedIn: 'root',
 })
 export class DataService {
-  lastUserId = new BehaviorSubject(0); // last user ID state
-
   constructor(private http: HttpClient) {}
 
-  get singleUser(): Observable<UserModel> {
-    return this.http.get<UserModel>(`${environment.API_URL}/users/2`);
+  getSingleUser(id: number): Observable<UserModel> {
+    return this.http.get<UserModel>(`${environment.API_URL}/users/${id}`);
   }
 
   get allUsers(): Observable<UserModel[]> {
-    const allUsers = this.http.get<UserModel[]>(`${environment.API_URL}/users`);
-    // get track of number of users in database and store its state in BehaviorSubject
-    allUsers.pipe(first()).subscribe((users) => {
-      this.lastUserId.next(users[users.length - 1].id);
-    });
-    return allUsers;
+    return this.http.get<UserModel[]>(`${environment.API_URL}/users`);
   }
 
   addUser(userData: UserModel): Observable<UserModel> {
     return this.http.post<UserModel>(`${environment.API_URL}/users`, userData);
   }
 
-  deleteUser(userData: UserModel) {
+  deleteUser(userData: UserModel): Observable<any> {
     return this.http.delete(`${environment.API_URL}/users/${userData.id}`);
   }
+
+  editUser(userData: UserModel) {}
 }

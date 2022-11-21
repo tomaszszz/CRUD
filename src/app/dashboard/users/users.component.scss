@@ -5,3 +5,14 @@
   max-width: 600px;
   gap: 10px;
 }
+
+.edit {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+div {
+  display: flex;
+  column-gap: 20px;
+}

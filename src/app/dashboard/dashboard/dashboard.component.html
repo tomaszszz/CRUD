@@ -1,0 +1,58 @@
+<ng-container *ngIf="user$ | async as user">
+  <mat-card class="card">
+    <ng-container [ngTemplateOutlet]="isEditMode ? edit : view"></ng-container>
+    <ng-template #edit>
+      <mat-card-header>
+        <form class="edit">
+          <div>
+            <mat-form-field>
+              <mat-label>Avatar URL</mat-label>
+              <input placeholder="Avatar URL" matInput />
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>First Name</mat-label>
+              <input placeholder="First Name" matInput />
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field>
+              <mat-label>Last Name</mat-label>
+              <input placeholder="Last Name" matInput />
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>E-Mail</mat-label>
+              <input placeholder="E-Mail" matInput />
+            </mat-form-field>
+          </div>
+        </form>
+      </mat-card-header>
+    </ng-template>
+
+    <ng-template #view>
+      <mat-card-header>
+        <img matCardAvatar [src]="user.avatar" />
+        <mat-card-title>
+          {{ user.firstName }} {{ user.lastName }}
+        </mat-card-title>
+        <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
+      </mat-card-header>
+    </ng-template>
+    <mat-card-actions align="start">
+      <button
+        color="primary"
+        *ngIf="!isEditMode"
+        (click)="isEditMode = !isEditMode"
+        mat-flat-button
+      >
+        Edit User Data
+      </button>
+      <button color="primary" *ngIf="isEditMode" mat-flat-button>
+        Apply Changes
+      </button>
+      <button color="error" (click)="deleteUser(user)" mat-flat-button>
+        Remove User
+      </button>
+    </mat-card-actions>
+    <mat-card-footer> User ID: {{ user.id }} </mat-card-footer>
+  </mat-card>
+</ng-container>

@@ -24,13 +24,14 @@ export class NavigationComponent implements OnInit {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private auth: AuthService,
+    public auth: AuthService,
     private misc: MiscService,
     public dialog: MatDialog
   ) {}
   whichRoute = this.misc.whichRoute;
 
   logout() {
+    console.log(this.auth.currentUserValue);
     this.auth.logout();
   }
 

@@ -17,14 +17,13 @@ export class TokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     let currentUser = this.auth.currentUserValue;
-    if (currentUser && currentUser.token) {
+    if (currentUser && currentUser.access_token) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${currentUser.token}`,
+          Authorization: `Bearer ${currentUser.access_token}`,
         },
       });
     }
-    // console.log(request);
     return next.handle(request);
   }
 }

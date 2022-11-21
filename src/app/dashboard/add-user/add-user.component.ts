@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { DataService } from 'src/app/_services/data.service';
 
 @Component({
@@ -8,7 +9,11 @@ import { DataService } from 'src/app/_services/data.service';
   styleUrls: ['./add-user.component.scss'],
 })
 export class AddUserComponent implements OnInit {
-  constructor(private fb: FormBuilder, private data: DataService) {}
+  constructor(
+    private fb: FormBuilder,
+    private data: DataService,
+    private dialogRef: MatDialogRef<AddUserComponent>
+  ) {}
 
   userForm = this.fb.group({
     firstName: ['', Validators.required],
@@ -20,12 +25,13 @@ export class AddUserComponent implements OnInit {
   ngOnInit(): void {}
 
   addUser() {
-    console.log(this.data.lastUserId.getValue() + 1);
     this.data
       .addUser({
         ...this.userForm.value,
-        id: this.data.lastUserId.getValue() + 1,
+        id: Date.now(),
       })
       .subscribe(console.log);
+    this.dialogRef.close();
+    location.reload();
   }
 }

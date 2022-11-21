@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
-import { UserModel } from '../_models/User';
+import { LoginModel } from '../_models/Login';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  API_URL = 'https://reqres.in/api';
+  API_URL = 'http://localhost:3000';
 
-  private currentUserSubject = new BehaviorSubject<UserModel>(
+  private currentUserSubject = new BehaviorSubject<LoginModel | undefined>(
     JSON.parse(localStorage.getItem('currentUser') as string)
   );
 
@@ -17,9 +17,9 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(username: string, password: string) {
+  login(email: string, password: string) {
     return this.http
-      .post<any>(`${this.API_URL}/login`, { username, password })
+      .post<any>(`${this.API_URL}/auth/login`, { email, password })
       .pipe(
         map((user) => {
           localStorage.setItem('currentUser', JSON.stringify(user));
@@ -29,11 +29,19 @@ export class AuthService {
       );
   }
 
-  register(username: string, password: string) {
-    return this.http.post<any>(`${this.API_URL}/register`, {
-      username,
-      password,
-    });
+  register(email: string, password: string) {
+    return this.http
+      .post<any>(`${this.API_URL}/auth/register`, {
+        email,
+        password,
+      })
+      .pipe(
+        map((user) => {
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.currentUserSubject.next(user);
+          return user;
+        })
+      );
   }
 
   get currentUserValue() {
@@ -44,6 +52,8 @@ export class AuthService {
     const user = localStorage.getItem('currentUser');
     if (user) {
       localStorage.removeItem('currentUser');
+      this.currentUserSubject.next(undefined);
     }
+    location.reload();
   }
 }

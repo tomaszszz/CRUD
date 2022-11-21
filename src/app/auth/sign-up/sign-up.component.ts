@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { take } from 'rxjs';
 import { AuthService } from 'src/app/_services/auth.service';
 
@@ -14,7 +15,11 @@ export class SignUpComponent implements OnInit {
     password: ['', Validators.required],
   });
 
-  constructor(private fb: FormBuilder, private auth: AuthService) {}
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
@@ -25,8 +30,11 @@ export class SignUpComponent implements OnInit {
         .pipe()
         .subscribe({
           next: (res) => console.log(res, 'VALID RESPONSE'),
-          error: (err) => console.log(err, 'ERROR AS FFFFFK'),
-          complete: () => console.log('COMPLETED'),
+          error: (err) => console.log(err, 'ERROR'),
+          complete: () => {
+            console.log('COMPLETED');
+            this.router.navigateByUrl('/auth/login');
+          },
         });
     }
   }

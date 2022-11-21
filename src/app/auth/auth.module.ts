@@ -8,11 +8,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../_helpers/shared/shared.module';
 
 @NgModule({
   declarations: [LoginComponent, SignUpComponent],
   imports: [
     CommonModule,
+    SharedModule,
     AuthRoutingModule,
     MatFormFieldModule,
     MatInputModule,
