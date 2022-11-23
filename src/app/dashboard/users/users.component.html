@@ -1,9 +1,9 @@
 <!-- <mat-select class="elements-choice" placeholder="Elements on page">
-  <mat-option *ngFor="let page of pagesChoice" [value]="page">
+  <mat-option *ngFor="let page of [5, 10, 15, 20]" [value]="page">
     {{ page }}
-  </mat-option>
+  </mat-option> 
 </mat-select> -->
-<ng-container *ngIf="users$ | async | paginate: 7 as pages">
+<ng-container *ngIf="users$ | async | paginate: 4 as pages">
   <ul class="pagination">
     Pages:
     <li *ngFor="let pageIndex of pages; index as i">
@@ -22,8 +22,6 @@
           </mat-card-title>
           <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
         </mat-card-header>
-        <!-- <img matCardImage [src]="user.avatar" /> -->
-        <!-- <mat-card-content> content </mat-card-content> -->
         <mat-card-actions align="start">
           <button color="primary" mat-flat-button>Edit User Data</button>
           <button color="error" (click)="deleteUser(user)" mat-flat-button>

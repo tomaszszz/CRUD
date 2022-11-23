@@ -23,7 +23,6 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    //
     const currentUser = this.auth.currentUserValue;
 
     if (currentUser !== null) {
