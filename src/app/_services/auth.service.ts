@@ -1,14 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { LoginModel } from '../_models/Login';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  API_URL = 'http://localhost:3000';
-
   private currentUserSubject = new BehaviorSubject<LoginModel | undefined>(
     JSON.parse(localStorage.getItem('currentUser') as string)
   );
@@ -19,7 +18,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.http
-      .post<any>(`${this.API_URL}/auth/login`, { email, password })
+      .post<any>(`${environment.API_URL}/auth/login`, { email, password })
       .pipe(
         map((user) => {
           localStorage.setItem('currentUser', JSON.stringify(user));
@@ -31,7 +30,7 @@ export class AuthService {
 
   register(email: string, password: string) {
     return this.http
-      .post<any>(`${this.API_URL}/auth/register`, {
+      .post<any>(`${environment.API_URL}/auth/register`, {
         email,
         password,
       })

@@ -6,7 +6,8 @@
   gap: 10px;
 }
 
-* {
+.elements-choice {
+  width: 200px;
 }
 
 .edit {
@@ -23,7 +24,7 @@ div {
 .pagination {
   display: flex;
   justify-content: center;
-  column-gap: 5px;
+  column-gap: 10px;
   font-size: 24px;
   font-weight: 600;
 }
@@ -35,4 +36,8 @@ div {
 
 a {
   cursor: pointer;
+  padding: 5px;
+  border-radius: 3px;
+  background: rgba(109, 51, 255, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }

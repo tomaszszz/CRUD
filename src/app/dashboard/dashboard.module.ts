@@ -4,10 +4,12 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+
 import { MatMenuModule } from '@angular/material/menu';
 import { SharedModule } from '../_helpers/shared/shared.module';
 import { AddUserComponent } from './add-user/add-user.component';
@@ -29,6 +31,7 @@ import { UsersComponent } from './users/users.component';
     MatIconModule,
     MatInputModule,
     MatButtonModule,
+    MatSelectModule,
     LayoutModule,
   ],
 })

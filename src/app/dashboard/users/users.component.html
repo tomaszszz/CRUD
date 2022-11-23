@@ -1,4 +1,17 @@
+<!-- <mat-select class="elements-choice" placeholder="Elements on page">
+  <mat-option *ngFor="let page of pagesChoice" [value]="page">
+    {{ page }}
+  </mat-option>
+</mat-select> -->
 <ng-container *ngIf="users$ | async | paginate: 7 as pages">
+  <ul class="pagination">
+    Pages:
+    <li *ngFor="let pageIndex of pages; index as i">
+      <a (click)="navigateToPage(i)">
+        {{ i + 1 }}
+      </a>
+    </li>
+  </ul>
   <ng-container *ngFor="let page of pages; count as c; index as i">
     <ng-container *ngIf="currentPage === i">
       <mat-card *ngFor="let user of page" class="card">
@@ -21,11 +34,4 @@
       </mat-card>
     </ng-container>
   </ng-container>
-  <ul class="pagination">
-    <li *ngFor="let pageIndex of pages; index as i">
-      <a (click)="navigateToPage(i)">
-        {{ i + 1 }}
-      </a>
-    </li>
-  </ul>
 </ng-container>

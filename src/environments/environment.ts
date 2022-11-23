@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL: 'http://localhost:3000',
+  API_URL: 'https://alert-ruby-sun-hat.cyclic.app',
   // API_URL: 'https://reqres.in/api',
 };
 
