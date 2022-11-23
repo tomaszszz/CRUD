@@ -1,11 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HashPasswordPipe } from '../hash-password.pipe';
+import { NgModule } from '@angular/core';
 import { PaginatePipe } from '../paginate.pipe';
 
 @NgModule({
-  declarations: [HashPasswordPipe, PaginatePipe],
+  declarations: [PaginatePipe],
   imports: [CommonModule],
-  exports: [HashPasswordPipe, PaginatePipe],
+  exports: [PaginatePipe],
 })
 export class SharedModule {}

@@ -10,7 +10,7 @@
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item href="#" routerLink="main">Main</a>
-      <a mat-list-item href="#" routerLink="dashboard">Dashboard</a>
+      <!-- <a mat-list-item href="#" routerLink="dashboard">Dashboard</a> -->
       <a mat-list-item href="#" routerLink="dashboard/users">Users</a>
       <a mat-list-item *ngIf="auth.currentUserValue" (click)="logout()"
         >Logout</a
