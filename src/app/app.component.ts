@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   title = 'CRUD';
 
   constructor(private router: Router, private misc: MiscService) {}
+  isLoading = this.misc.loadingState.asObservable();
 
   ngOnInit(): void {
     // check on which route we are right now and set its state in the MiscService

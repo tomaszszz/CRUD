@@ -1,7 +1,12 @@
-<ng-container
-  [ngTemplateOutlet]="auth.currentUserValue ? loggedInTemplate : loginTemplate"
->
+<ng-container *ngIf="!auth.hasFailed; else failed">
+  <ng-container
+    [ngTemplateOutlet]="auth.currentUserValue ? loggedIn : loginTemplate"
+  >
+  </ng-container>
 </ng-container>
+<ng-template #failed>
+  <h1>Login or password is invalid</h1>
+</ng-template>
 <ng-template #loginTemplate>
   <h1>Enter login and password</h1>
   <form action="submit" class="form" [formGroup]="form">
@@ -34,6 +39,6 @@
     </div>
   </form>
 </ng-template>
-<ng-template #loggedInTemplate>
+<ng-template #loggedIn>
   <h1>You are logged in.</h1>
 </ng-template>

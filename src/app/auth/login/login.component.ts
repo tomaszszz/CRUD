@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/_services/auth.service';
+import { MiscService } from 'src/app/_services/misc.service';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,13 @@ import { AuthService } from 'src/app/_services/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private fb: FormBuilder, public auth: AuthService) {}
+  whichRoute = this.misc.whichRoute;
+
+  constructor(
+    private fb: FormBuilder,
+    public auth: AuthService,
+    private misc: MiscService
+  ) {}
 
   form = this.fb.group({
     login: ['', Validators.required],
@@ -16,13 +23,19 @@ export class LoginComponent implements OnInit {
   });
 
   login(): void {
-    const formValue = this.form.value;
+    const userCredentials = this.form.value;
     if (this.form.valid) {
       this.auth
-        .login(this.form.value.login, this.form.value.password)
+        .login(userCredentials.login, userCredentials.password)
         .subscribe({
-          next: (val) => console.log(val, 'SUCCESS'),
-          error: (err) => console.error(err, 'ERROR'),
+          next: (val) => {
+            this.misc.loadingState.next(true);
+            console.log(val, 'LOADING');
+          },
+          complete: () => {
+            console.log('LOGIN SUCCESS');
+            setTimeout(() => this.misc.loadingState.next(false), 2000);
+          },
         });
     }
   }

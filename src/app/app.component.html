@@ -1,3 +1,13 @@
 <app-navigation>
-  <router-outlet></router-outlet>
+  <ng-container [ngTemplateOutlet]="(isLoading | async) ? loading : content">
+  </ng-container>
+
+  <ng-template #content>
+    <router-outlet></router-outlet>
+  </ng-template>
+
+  <ng-template #loading>
+    <mat-progress-spinner mode="indeterminate" [value]="" color="accent">
+    </mat-progress-spinner>
+  </ng-template>
 </app-navigation>

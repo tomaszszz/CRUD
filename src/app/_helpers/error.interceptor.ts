@@ -19,11 +19,10 @@ export class ErrorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError<any, Observable<any>>((err) => {
-        // MOCK API ENDPOINT, NOT NECESSARY
-        // if ([401, 403].includes(err.status)) {
-        //   this.auth.logout();
-        //   console.log('401/403, logged out');
-        // }
+        console.log(err.status);
+        if ([401, 403].includes(err.status)) {
+          this.auth.hasFailed = true;
+        }
         return throwError(() => {
           return new Error(err.error.error);
         });

@@ -13,6 +13,7 @@ export class AuthService {
   );
 
   currentUser = this.currentUserSubject.asObservable();
+  hasFailed = false;
 
   constructor(private http: HttpClient) {}
 

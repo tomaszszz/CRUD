@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
 import { AuthService } from 'src/app/_services/auth.service';
+import { MiscService } from 'src/app/_services/misc.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -17,22 +18,29 @@ export class SignUpComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private auth: AuthService,
-    private router: Router
+    public auth: AuthService,
+    private router: Router,
+    private misc: MiscService
   ) {}
 
   ngOnInit(): void {}
 
   register() {
+    const userCredentials = this.form.value;
     if (this.form.valid) {
       this.auth
-        .register(this.form.value.login, this.form.value.password)
+        .register(userCredentials.login, userCredentials.password)
         .pipe()
         .subscribe({
-          next: (res) => console.log(res, 'VALID RESPONSE'),
-          error: (err) => console.log(err, 'ERROR'),
+          next: (res) => {
+            console.log(res, 'LOADING');
+            this.misc.loadingState.next(true);
+          },
+          error: (err) => console.log(err, 'ERROR' + err),
           complete: () => {
-            console.log('COMPLETED');
+            console.log('VALID RESPONSE, COMPLETED');
+            // for demonstration purposes of loading state
+            setTimeout(() => this.misc.loadingState.next(false), 2000);
             this.router.navigateByUrl('/auth/login');
           },
         });

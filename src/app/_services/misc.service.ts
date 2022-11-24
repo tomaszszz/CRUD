@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class MiscService {
   constructor() {}
-  whichRoute = new BehaviorSubject<string>('/');
+  whichRoute = new BehaviorSubject<string>('loading');
   isUsersRoute = new BehaviorSubject<boolean>(false);
+  loadingState = new BehaviorSubject<boolean>(false);
 }
